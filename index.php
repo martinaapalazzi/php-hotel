@@ -81,23 +81,32 @@
                 ?>
             </thead>
             <tbody>
-
-                <tr>
                     <?php
                         foreach ($hotels as $hotel) {
-                            //if ($hotel['parking']== true){
-                            //    $parkingIncluded = 'Yes';
-                            //}
-                            //else ($hotel['parking']== false){
-                            //    $parkingIncluded = 'No'
-                            //};
-                            echo "<td>$hotel[name]</td>
-                            <td>$hotel[description]</td>
-                            <td>$hotel[parking]</td>
-                            <td>$hotel[vote]</td>
-                            <td>$hotel[distance_to_center]</td>
-                            </tr>
-                            ";
+                            if ($hotel['parking']== true){
+                                $parkingIncluded = 'Yes';
+                            }
+                            else {
+                               $parkingIncluded = 'No';
+                            };
+
+                            //echo "
+                            //<tr>
+                            //<td>$hotel[name]</td>
+                            //<td>$hotel[description]</td>
+                            //<td>$hotel[parking]</td>
+                            //<td>$hotel[vote]</td>
+                            //<td>$hotel[distance_to_center]</td>
+                            //</tr>
+                            //";
+
+                            echo "<tr>";
+                            echo "<td>".$hotel['name']."</td>";
+                            echo "<td>".$hotel['description']."</td>";
+                            echo "<td>".$parkingIncluded."</td>";
+                            echo "<td>".$hotel['vote']."</td>";
+                            echo "<td>".$hotel['distance_to_center']."</td>";
+                            echo "</tr>";   
                         }
                     ?>
             </tbody>
@@ -111,15 +120,7 @@
             </button>
         </form>
     </div>
-    <div>
-        <?php 
-            $parkingTrue = true;
-
-            if ($_GET['parking'] == true) {
-                echo '<div>'.$hotel['parking'].'</div>';
-            }
-        ?>
-    </div>
+    
     
 </body>
 </html>
