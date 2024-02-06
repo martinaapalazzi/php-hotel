@@ -44,6 +44,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>PHP Hotel</title>
 </head>
 <body>
@@ -76,7 +77,7 @@
                 </tr>
 
                 <?php
-                    //echo '<tr>'.'<th scope="col">'.array_keys($hotels).'</th>'.'</tr>'
+                    //echo '<tr>'.'<th scope="col">'.array_keys($hotels[0]).'</th>'.'</tr>'
                 ?>
             </thead>
             <tbody>
@@ -84,45 +85,40 @@
                 <tr>
                     <?php
                         foreach ($hotels as $hotel) {
-                            echo '<td>'.$hotel['name'].'</td>';
+                            //if ($hotel['parking']== true){
+                            //    $parkingIncluded = 'Yes';
+                            //}
+                            //else ($hotel['parking']== false){
+                            //    $parkingIncluded = 'No'
+                            //};
+                            echo "<td>$hotel[name]</td>
+                            <td>$hotel[description]</td>
+                            <td>$hotel[parking]</td>
+                            <td>$hotel[vote]</td>
+                            <td>$hotel[distance_to_center]</td>
+                            </tr>
+                            ";
                         }
                     ?>
-                </tr>
-
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@mdo</td>
-                </tr>
             </tbody>
         </table>
+    </div>
+
+    <div>
+        <form action="" method="GET">
+            <button class="p-1">
+                HOTELS WITH PARKING INCLUDED
+            </button>
+        </form>
+    </div>
+    <div>
+        <?php 
+            $parkingTrue = true;
+
+            if ($_GET['parking'] == true) {
+                echo '<div>'.$hotel['parking'].'</div>';
+            }
+        ?>
     </div>
     
 </body>
