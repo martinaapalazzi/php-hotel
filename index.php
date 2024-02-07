@@ -36,6 +36,33 @@
             'distance_to_center' => 50
         ],
     ];
+    $filteredHotels = [];
+    foreach ($hotels as $iindex => $hotel) {
+        if (
+            isset($_GET['parking']) == true // se non è stringa null
+            && 
+            $_GET['parking'] != '' // se non è una stringa vuota
+        ) {
+            if (
+                $hotel['parking'] == true
+                &&
+                $_GET['parking'] == 'yes'
+                
+            ) {
+                $filteredHotels[] = $hotel;
+            }
+            else if (
+                $hotel['parking'] == false
+                &&
+                $_GET['parking'] == 'no'
+            ) {
+                $filteredHotels[] = $hotel;
+            }
+        }
+        else {
+            $filteredHotels[] = $hotel;
+        }
+    };
 ?>
 
 <!DOCTYPE html>
@@ -53,13 +80,13 @@
         <ul>
             <?php
                 foreach ($hotels as $hotel){
-                    echo '<li>'.$hotel['name'].', '.$hotel['description'].', '.$hotel['parking'].', '.$hotel['vote'].', '.$hotel['distance_to_center'].'</li>';
+                    echo '<li>'.$hotel['name'].' // '.$hotel['description'].' // '.$hotel['parking'].' // '.$hotel['vote'].' // '.$hotel['distance_to_center'].'</li>';
                 }
             ?>
 
             <?php     
                 //for ($i = 0; $i <= count($hotels); $i++){
-                //    echo '<li>'.$i['name'].'</li>';
+                //    echo '<li>'.$hotels[$i]['name'].'</li>';
                 //}
             ?> 
         </ul>   
@@ -82,7 +109,7 @@
             </thead>
             <tbody>
                     <?php
-                        foreach ($hotels as $hotel) {
+                        foreach ($filteredHotels as $hotel) {
                             if ($hotel['parking']== true){
                                 $parkingIncluded = 'Yes';
                             }
@@ -103,7 +130,7 @@
                             echo "<tr>";
                             echo "<td>".$hotel['name']."</td>";
                             echo "<td>".$hotel['description']."</td>";
-                            echo "<td>".$parkingIncluded."</td>";
+                            echo "<td>".$parkingIncluded."</td>"; // echo "<td>".($hotel['parking'] == true ? 'Yes' : 'No')."</td>";
                             echo "<td>".$hotel['vote']."</td>";
                             echo "<td>".$hotel['distance_to_center']."</td>";
                             echo "</tr>";   
@@ -115,9 +142,19 @@
 
     <div>
         <form action="" method="GET">
-            <button class="p-1">
-                HOTELS WITH PARKING INCLUDED
-            </button>
+            <div>
+                <label for="parking">Parking:</label>
+                <select name="parking" id="parking">
+                    <option value="">Don't mind</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">
+                    Filter!
+                </button>
+            </div>
         </form>
     </div>
     
